@@ -1,0 +1,77 @@
+{
+  "simpleTrip": {
+    "name": "Simple 3-Person Trip",
+    "description": "Basic trip expense sharing",
+    "transactions": [
+      { "from": "Alice", "to": "Bob", "amount": 50 },
+      { "from": "Bob", "to": "Charlie", "amount": 30 },
+      { "from": "Charlie", "to": "Alice", "amount": 20 }
+    ],
+    "expectedSettlements": 2,
+    "explanation": "Original: 3 transactions. Simplified: 2 settlements (cycle broken)"
+  },
+  
+  "complexGroup": {
+    "name": "Complex Group with Cycles",
+    "description": "Multiple people with circular debts",
+    "transactions": [
+      { "from": "Alice", "to": "Bob", "amount": 100 },
+      { "from": "Bob", "to": "Charlie", "amount": 50 },
+      { "from": "Charlie", "to": "David", "amount": 75 },
+      { "from": "David", "to": "Alice", "amount": 25 },
+      { "from": "Alice", "to": "Charlie", "amount": 30 }
+    ],
+    "expectedSettlements": 3,
+    "explanation": "Complex transactions with multiple cycles"
+  },
+
+  "roommates": {
+    "name": "Roommate Bill Splitting",
+    "description": "Three roommates splitting utilities and rent",
+    "transactions": [
+      { "from": "Alice", "to": "Rent", "amount": 1500 },
+      { "from": "Bob", "to": "Utilities", "amount": 150 },
+      { "from": "Charlie", "to": "Groceries", "amount": 120 },
+      { "from": "Rent", "to": "Alice", "amount": 500 },
+      { "from": "Rent", "to": "Bob", "amount": 500 },
+      { "from": "Utilities", "to": "Bob", "amount": 50 },
+      { "from": "Utilities", "to": "Charlie", "amount": 50 },
+      { "from": "Groceries", "to": "Alice", "amount": 40 },
+      { "from": "Groceries", "to": "Bob", "amount": 40 }
+    ],
+    "expectedSettlements": 4,
+    "explanation": "Realistic roommate scenario with shared expenses"
+  },
+
+  "disconnectedGroups": {
+    "name": "Two Disconnected Groups",
+    "description": "Two separate groups with no interaction",
+    "transactions": [
+      { "from": "Alice", "to": "Bob", "amount": 50 },
+      { "from": "Bob", "to": "Alice", "amount": 30 },
+      { "from": "Charlie", "to": "David", "amount": 100 },
+      { "from": "David", "to": "Charlie", "amount": 75 }
+    ],
+    "expectedSettlements": 2,
+    "explanation": "Union-Find shows 2 separate components"
+  },
+
+  "largeGroup": {
+    "name": "Large Friend Group",
+    "description": "Larger group demonstrating algorithm efficiency",
+    "transactions": [
+      { "from": "Alice", "to": "Bob", "amount": 50 },
+      { "from": "Bob", "to": "Charlie", "amount": 40 },
+      { "from": "Charlie", "to": "David", "amount": 30 },
+      { "from": "David", "to": "Eve", "amount": 25 },
+      { "from": "Eve", "to": "Frank", "amount": 35 },
+      { "from": "Frank", "to": "Grace", "amount": 45 },
+      { "from": "Grace", "to": "Henry", "amount": 20 },
+      { "from": "Henry", "to": "Alice", "amount": 60 },
+      { "from": "Alice", "to": "Charlie", "amount": 15 },
+      { "from": "David", "to": "Frank", "amount": 10 }
+    ],
+    "expectedSettlements": 5,
+    "explanation": "Demonstrates algorithm efficiency with 10 transactions"
+  }
+}
