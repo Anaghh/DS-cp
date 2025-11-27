@@ -41,11 +41,11 @@ function clearAll() {
 
 function loadSampleData() {
     transactions = [
-        { from: 'Alice', to: 'Bob', amount: 50 },
-        { from: 'Bob', to: 'Charlie', amount: 30 },
-        { from: 'Charlie', to: 'David', amount: 25 },
-        { from: 'David', to: 'Alice', amount: 15 },
-        { from: 'Alice', to: 'Charlie', amount: 20 }
+        { from: 'Rahul', to: 'Priya', amount: 50 },
+        { from: 'Priya', to: 'Amit', amount: 30 },
+        { from: 'Amit', to: 'Neha', amount: 25 },
+        { from: 'Neha', to: 'Rahul', amount: 15 },
+        { from: 'Rahul', to: 'Amit', amount: 20 }
     ];
     updateUI();
 }

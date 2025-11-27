@@ -44,11 +44,11 @@ function drawBeforeGraph() {
         if (balance < 0) {
             color = graphColors.debtor;
             shadowColor = 'rgba(239, 68, 68, 0.5)';
-            title = `${person}\nOwes: $${Math.abs(balance)}`;
+            title = `${person}\nOwes: ₹${Math.abs(balance)}`;
         } else if (balance > 0) {
             color = graphColors.creditor;
             shadowColor = 'rgba(34, 197, 94, 0.5)';
-            title = `${person}\nOwed: $${balance}`;
+            title = `${person}\nOwed: ₹${balance}`;
         } else {
             color = graphColors.neutral;
             shadowColor = 'rgba(100, 116, 139, 0.5)';
@@ -57,7 +57,7 @@ function drawBeforeGraph() {
 
         nodes.add({
             id: person,
-            label: `${person}\n$${balance}`,
+            label: `${person}\n₹${balance}`,
             color: color,
             title: title,
             shape: 'circle',
@@ -75,8 +75,8 @@ function drawBeforeGraph() {
             id: index,
             from: t.from,
             to: t.to,
-            label: `$${t.amount}`,
-            title: `${t.from} → ${t.to}: $${t.amount}`,
+            label: `₹${t.amount}`,
+            title: `${t.from} → ${t.to}: ₹${t.amount}`,
             arrows: { to: { enabled: true, scaleFactor: 0.8 } },
             color: { color: graphColors.edge, highlight: graphColors.edgeHighlight, opacity: 0.8 },
             font: { align: 'middle', size: 12, color: '#94a3b8', strokeWidth: 0 },
@@ -152,11 +152,11 @@ function drawAfterGraph() {
         if (balance < 0) {
             color = graphColors.debtor;
             shadowColor = 'rgba(239, 68, 68, 0.5)';
-            title = `${person}\nOwes: $${Math.abs(balance)}`;
+            title = `${person}\nOwes: ₹${Math.abs(balance)}`;
         } else if (balance > 0) {
             color = graphColors.creditor;
             shadowColor = 'rgba(34, 197, 94, 0.5)';
-            title = `${person}\nOwed: $${balance}`;
+            title = `${person}\nOwed: ₹${balance}`;
         } else {
             color = graphColors.neutral;
             shadowColor = 'rgba(100, 116, 139, 0.5)';
@@ -195,8 +195,8 @@ function drawAfterGraph() {
                 id: `settlement-${index}`,
                 from: from,
                 to: to,
-                label: `$${amount}`,
-                title: `${from} → ${to}: $${amount}`,
+                label: `₹${amount}`,
+                title: `${from} → ${to}: ₹${amount}`,
                 arrows: { to: { enabled: true, scaleFactor: 0.8 } },
                 color: { color: graphColors.settlement, highlight: graphColors.settlementHighlight, opacity: 0.9 },
                 width: 3,
