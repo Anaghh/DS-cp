@@ -78,7 +78,7 @@ function displayTransactions() {
             <p>
                 <strong>${i + 1}.</strong> <span style="color: var(--algo1);">${t.from}</span> 
                 → <span style="color: var(--algo2);">${t.to}</span>: 
-                <span style="font-weight: 600; color: var(--dark);">$${t.amount}</span>
+                <span style="font-weight: 600; color: var(--dark);">₹${t.amount}</span>
                 <button onclick="removeTransaction(${i})" class="btn btn-small" 
                     style="padding: 4px 8px; width: auto; display: inline;">✕ Remove</button>
             </p>

@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learn - Cash Flow Simplification Algorithms</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="bg-animation">
+        <div class="bg-gradient"></div>
+        <div class="bg-grid"></div>
+        <div class="floating-orbs">
+            <div class="orb orb-1"></div>
+            <div class="orb orb-2"></div>
+            <div class="orb orb-3"></div>
+        </div>
+    </div>
+
+    <header>
+        <div class="header-content">
+            <div class="logo-container">
+                <div class="logo-icon">
+                    <i data-lucide="book-open" class="icon-large"></i>
+                </div>
+                <div class="logo-rings">
+                    <div class="ring ring-1"></div>
+                    <div class="ring ring-2"></div>
+                    <div class="ring ring-3"></div>
+                </div>
+            </div>
+            <h1>Learn <span class="gradient-text">Algorithms</span></h1>
+            <p class="subtitle">
+                <i data-lucide="graduation-cap" class="icon-inline"></i>
+                Deep Dive into Cash Flow Simplification Techniques
+            </p>
+            <div class="team-badges">
+                <span class="badge"><i data-lucide="user" class="icon-xs"></i> Digvijay</span>
+                <span class="badge"><i data-lucide="user" class="icon-xs"></i> Shahid</span>
+                <span class="badge"><i data-lucide="user" class="icon-xs"></i> Eeshan</span>
+                <span class="badge"><i data-lucide="user" class="icon-xs"></i> Anagh</span>
+            </div>
+        </div>
+        <div class="header-decoration">
+            <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
+                <path d="M0,60 C360,120 720,0 1080,60 C1260,90 1380,60 1440,60 L1440,120 L0,120 Z" fill="var(--bg-primary)"/>
+            </svg>
+        </div>
+    </header>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <ul>
+                <li><a href="index.html"><i data-lucide="home" class="icon-nav"></i><span>Home</span></a></li>
+                <li><a href="#overview"><i data-lucide="info" class="icon-nav"></i><span>Overview</span></a></li>
+                <li><a href="#greedy"><i data-lucide="arrow-right-left" class="icon-nav"></i><span>Greedy</span></a></li>
+                <li><a href="#dfs"><i data-lucide="git-branch" class="icon-nav"></i><span>DFS</span></a></li>
+                <li><a href="#union-find"><i data-lucide="link" class="icon-nav"></i><span>Union-Find</span></a></li>
+                <li><a href="#heap"><i data-lucide="bar-chart-2" class="icon-nav"></i><span>Heap</span></a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="container">
+        <!-- Overview Section -->
+        <section id="overview" class="section">
+            <div class="section-header">
+                <div class="section-icon">
+                    <i data-lucide="lightbulb" class="icon-section"></i>
+                </div>
+                <h2>Understanding Cash Flow Simplification</h2>
+            </div>
+            <div class="exp-content">
+                <p><strong>The Problem:</strong> When a group of people have multiple transactions among themselves (like splitting bills, group trips, etc.), there can be many individual payments needed. Cash Flow Simplification aims to minimize the total number of transactions required to settle all debts.</p>
+                
+                <p><strong>Example:</strong> If Alice owes Bob ₹100, Bob owes Charlie ₹100, and Charlie owes Alice ₹100, instead of 3 transactions, we can settle everything with 0 transactions (everyone's net balance is 0)!</p>
+
+                <div class="pros-cons" style="margin-top: 30px;">
+                    <div class="pros">
+                        <strong><i data-lucide="target" class="icon-xs"></i> Goal:</strong>
+                        <ul>
+                            <li>Minimize number of transactions</li>
+                            <li>Preserve net balances for everyone</li>
+                            <li>Find efficient settlement paths</li>
+                            <li>Handle complex group dynamics</li>
+                        </ul>
+                    </div>
+                    <div class="cons" style="border-top-color: var(--violet);">
+                        <strong><i data-lucide="puzzle" class="icon-xs"></i> Key Concepts:</strong>
+                        <ul>
+                            <li>Net Balance = Money Received - Money Paid</li>
+                            <li>Debtors: People with negative balance</li>
+                            <li>Creditors: People with positive balance</li>
+                            <li>Settlement: Transfer from debtor to creditor</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Algorithm 1: Greedy -->
+        <section id="greedy" class="section">
+            <div class="explanation-card">
+                <div class="exp-header algo-1">
+                    <div class="exp-icon"><i data-lucide="arrow-right-left"></i></div>
+                    <div>
+                        <h3>Algorithm 1: Greedy Two-Pointer</h3>
+                        <span class="exp-by"><i data-lucide="user" class="icon-xs"></i> Implemented by: Digvijay</span>
+                    </div>
+                </div>
+                <div class="exp-content">
+                    <p><strong>Core Idea:</strong> Sort all net balances and greedily match the person who owes the most with the person who is owed the most. This approach uses a two-pointer technique after sorting.</p>
+                    
+                    <div class="code-block">
+                        <div class="code-header">
+                            <i data-lucide="code" class="icon-xs"></i> Step-by-Step Algorithm
+                        </div>
+                        <pre>
+Step 1: Calculate Net Balance
+   - For each transaction (A → B: ₹X)
+   - Subtract X from A's balance
+   - Add X to B's balance
+
+Step 2: Separate Debtors & Creditors
+   - Debtors: People with negative balance
+   - Creditors: People with positive balance
+   - Ignore zero-balance people
+
+Step 3: Sort Both Lists
+   - Sort debtors by amount (most debt first)
+   - Sort creditors by amount (most owed first)
+
+Step 4: Two-Pointer Matching
+   - left pointer at debtors[0]
+   - right pointer at creditors[0]
+   - Match and settle minimum of both amounts
+   - Move pointer whose balance becomes 0
+
+Step 5: Repeat until all settled
+                        </pre>
+                    </div>
+
+                    <div class="code-block">
+                        <div class="code-header">
+                            <i data-lucide="file-code" class="icon-xs"></i> C++ Implementation Highlights
+                        </div>
+                        <pre>
+// Key data structures used:
+map&lt;string, int&gt; balances;      // Name → Net Balance
+vector&lt;pair&lt;int, string&gt;&gt; people; // (Balance, Name) pairs
+
+// Sorting step:
+sort(people.begin(), people.end());
+
+// Two-pointer matching:
+int left = 0, right = people.size() - 1;
+while (left < right) {
+    int debt = -people[left].first;
+    int credit = people[right].first;
+    int settle = min(debt, credit);
+    // Record: left pays settle to right
+    // Update balances and move pointers
+}
+                        </pre>
+                    </div>
+
+                    <div class="complexity">
+                        <div class="complexity-item">
+                            <div class="complexity-header">
+                                <i data-lucide="clock" class="icon-xs"></i>
+                                <strong>Time Complexity:</strong>
+                            </div>
+                            <code>O(n log n)</code>
+                            <p>Dominated by sorting. The two-pointer matching itself is O(n).</p>
+                        </div>
+                        <div class="complexity-item">
+                            <div class="complexity-header">
+                                <i data-lucide="hard-drive" class="icon-xs"></i>
+                                <strong>Space Complexity:</strong>
+                            </div>
+                            <code>O(n)</code>
+                            <p>Vector to store n people's balances.</p>
+                        </div>
+                    </div>
+
+                    <div class="pros-cons">
+                        <div class="pros">
+                            <strong><i data-lucide="check-circle" class="icon-xs"></i> Advantages:</strong>
+                            <ul>
+                                <li>Simple and intuitive approach</li>
+                                <li>Easy to implement and debug</li>
+                                <li>Good general-purpose solution</li>
+                                <li>Minimal data structure knowledge needed</li>
+                            </ul>
+                        </div>
+                        <div class="cons">
+                            <strong><i data-lucide="x-circle" class="icon-xs"></i> Disadvantages:</strong>
+                            <ul>
+                                <li>Doesn't show original transaction paths</li>
+                                <li>O(n log n) complexity from sorting</li>
+                                <li>Doesn't identify independent groups</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <p><strong><i data-lucide="lightbulb" class="icon-xs"></i> When to Use:</strong> Best for general cases where you need a quick, simple solution without special requirements.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Algorithm 2: DFS -->
+        <section id="dfs" class="section">
+            <div class="explanation-card">
+                <div class="exp-header algo-2">
+                    <div class="exp-icon"><i data-lucide="git-branch"></i></div>
+                    <div>
+                        <h3>Algorithm 2: DFS Graph Traversal</h3>
+                        <span class="exp-by"><i data-lucide="user" class="icon-xs"></i> Implemented by: Shahid</span>
+                    </div>
+                </div>
+                <div class="exp-content">
+                    <p><strong>Core Idea:</strong> Model the transactions as a directed graph where each person is a node and transactions are edges. Use Depth-First Search to explore and settle debts along paths.</p>
+                    
+                    <div class="code-block">
+                        <div class="code-header">
+                            <i data-lucide="code" class="icon-xs"></i> Step-by-Step Algorithm
+                        </div>
+                        <pre>
+Step 1: Build the Graph
+   - Each person is a node (vertex)
+   - Each transaction A → B is a directed edge
+   - Edge weight = transaction amount
+
+Step 2: Calculate Net Balances
+   - Same as greedy approach
+   - Track who owes and who is owed
+
+Step 3: DFS from Each Debtor
+   - Start from a person with negative balance
+   - Explore paths to find creditors
+   - Use recursion to traverse deeply
+
+Step 4: Settle Along Paths
+   - When reaching a creditor via DFS
+   - Calculate settlement amount
+   - Update balances of both parties
+   - Backtrack and continue
+
+Step 5: Mark Visited Nodes
+   - Avoid cycles in the graph
+   - Track visited during each DFS call
+                        </pre>
+                    </div>
+
+                    <div class="code-block">
+                        <div class="code-header">
+                            <i data-lucide="file-code" class="icon-xs"></i> C++ Implementation Highlights
+                        </div>
+                        <pre>
+// Key data structures:
+map&lt;string, vector&lt;pair&lt;string, int&gt;&gt;&gt; graph; // Adjacency list
+map&lt;string, int&gt; balance;                       // Net balances
+set&lt;string&gt; visited;                            // Track visited
+
+// DFS function:
+void dfs(string node, string target, int flow) {
+    if (node == target) {
+        // Found path, settle flow amount
+        return;
+    }
+    visited.insert(node);
+    for (auto& [neighbor, weight] : graph[node]) {
+        if (visited.find(neighbor) == visited.end()) {
+            dfs(neighbor, target, min(flow, weight));
+        }
+    }
+}
+                        </pre>
+                    </div>
+
+                    <div class="complexity">
+                        <div class="complexity-item">
+                            <div class="complexity-header">
+                                <i data-lucide="clock" class="icon-xs"></i>
+                                <strong>Time Complexity:</strong>
+                            </div>
+                            <code>O(V + E)</code>
+                            <p>V = number of people, E = number of transactions.</p>
+                        </div>
+                        <div class="complexity-item">
+                            <div class="complexity-header">
+                                <i data-lucide="hard-drive" class="icon-xs"></i>
+                                <strong>Space Complexity:</strong>
+                            </div>
+                            <code>O(V + E)</code>
+                            <p>For adjacency list and recursion call stack.</p>
+                        </div>
+                    </div>
+
+                    <div class="pros-cons">
+                        <div class="pros">
+                            <strong><i data-lucide="check-circle" class="icon-xs"></i> Advantages:</strong>
+                            <ul>
+                                <li>Shows actual transaction paths</li>
+                                <li>Graph-based approach is educational</li>
+                                <li>Linear time complexity O(V+E)</li>
+                                <li>Natural for visualizing relationships</li>
+                            </ul>
+                        </div>
+                        <div class="cons">
+                            <strong><i data-lucide="x-circle" class="icon-xs"></i> Disadvantages:</strong>
+                            <ul>
+                                <li>More complex implementation</li>
+                                <li>Recursion can cause stack overflow</li>
+                                <li>May not find globally optimal paths</li>
+                                <li>Requires graph data structure knowledge</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <p><strong><i data-lucide="lightbulb" class="icon-xs"></i> When to Use:</strong> When you need to understand and visualize payment paths, especially for smaller datasets.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Algorithm 3: Union-Find -->
+        <section id="union-find" class="section">
+            <div class="explanation-card">
+                <div class="exp-header algo-3">
+                    <div class="exp-icon"><i data-lucide="link"></i></div>
+                    <div>
+                        <h3>Algorithm 3: Union-Find (Disjoint Sets)</h3>
+                        <span class="exp-by"><i data-lucide="user" class="icon-xs"></i> Implemented by: Eeshan</span>
+                    </div>
+                </div>
+                <div class="exp-content">
+                    <p><strong>Core Idea:</strong> Use the Union-Find (Disjoint Set Union) data structure to identify independent groups of people. Then solve each group separately for optimal efficiency.</p>
+                    
+                    <div class="code-block">
+                        <div class="code-header">
+                            <i data-lucide="code" class="icon-xs"></i> Step-by-Step Algorithm
+                        </div>
+                        <pre>
+Step 1: Initialize Union-Find
+   - parent[i] = i for all people (each is own parent)
+   - rank[i] = 0 for all (for union by rank)
+
+Step 2: Process Transactions
+   - For each transaction A → B
+   - Unite A and B in the same set
+   - Use path compression for efficiency
+
+Step 3: Find Connected Components
+   - Group people by their root parent
+   - Each group is independent
+
+Step 4: Solve Each Group
+   - For each connected component:
+   - Apply greedy two-pointer within group
+   - Generate settlements for that group
+
+Step 5: Combine Results
+   - Merge settlements from all groups
+   - Total settlements = sum of all group settlements
+                        </pre>
+                    </div>
+
+                    <div class="code-block">
+                        <div class="code-header">
+                            <i data-lucide="file-code" class="icon-xs"></i> C++ Implementation Highlights
+                        </div>
+                        <pre>
+// Union-Find data structure:
+map&lt;string, string&gt; parent;
+map&lt;string, int&gt; rank;
+
+// Find with path compression:
+string find(string x) {
+    if (parent[x] != x) {
+        parent[x] = find(parent[x]); // Path compression
+    }
+    return parent[x];
+}
+
+// Union by rank:
+void unite(string x, string y) {
+    string px = find(x), py = find(y);
+    if (px == py) return;
+    if (rank[px] < rank[py]) swap(px, py);
+    parent[py] = px;
+    if (rank[px] == rank[py]) rank[px]++;
+}
+                        </pre>
+                    </div>
+
+                    <div class="complexity">
+                        <div class="complexity-item">
+                            <div class="complexity-header">
+                                <i data-lucide="clock" class="icon-xs"></i>
+                                <strong>Time Complexity:</strong>
+                            </div>
+                            <code>O(n α(n)) ≈ O(n)</code>
+                            <p>α(n) is inverse Ackermann function (practically constant, ≤ 4).</p>
+                        </div>
+                        <div class="complexity-item">
+                            <div class="complexity-header">
+                                <i data-lucide="hard-drive" class="icon-xs"></i>
+                                <strong>Space Complexity:</strong>
+                            </div>
+                            <code>O(n)</code>
+                            <p>For parent and rank arrays.</p>
+                        </div>
+                    </div>
+
+                    <div class="pros-cons">
+                        <div class="pros">
+                            <strong><i data-lucide="check-circle" class="icon-xs"></i> Advantages:</strong>
+                            <ul>
+                                <li>Nearly linear time: O(n α(n))</li>
+                                <li>Identifies independent groups</li>
+                                <li>Can parallelize group solutions</li>
+                                <li>Very efficient with optimizations</li>
+                            </ul>
+                        </div>
+                        <div class="cons">
+                            <strong><i data-lucide="x-circle" class="icon-xs"></i> Disadvantages:</strong>
+                            <ul>
+                                <li>Requires understanding Union-Find</li>
+                                <li>More complex data structure</li>
+                                <li>Overhead for small, connected graphs</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <p><strong><i data-lucide="lightbulb" class="icon-xs"></i> When to Use:</strong> When you have potentially disconnected groups and want to optimize by solving each group independently.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Algorithm 4: Heap -->
+        <section id="heap" class="section">
+            <div class="explanation-card">
+                <div class="exp-header algo-4">
+                    <div class="exp-icon"><i data-lucide="bar-chart-2"></i></div>
+                    <div>
+                        <h3>Algorithm 4: Min-Heap Priority Queue</h3>
+                        <span class="exp-by"><i data-lucide="user" class="icon-xs"></i> Implemented by: Anagh</span>
+                    </div>
+                </div>
+                <div class="exp-content">
+                    <p><strong>Core Idea:</strong> Use two priority queues (heaps) - a min-heap for debtors and a max-heap for creditors. Always match the person with the highest debt against the person owed the most.</p>
+                    
+                    <div class="code-block">
+                        <div class="code-header">
+                            <i data-lucide="code" class="icon-xs"></i> Step-by-Step Algorithm
+                        </div>
+                        <pre>
+Step 1: Calculate Net Balances
+   - Same as other approaches
+   - Identify debtors and creditors
+
+Step 2: Build Two Heaps
+   - Min-heap: All debtors (by debt amount)
+   - Max-heap: All creditors (by credit amount)
+
+Step 3: Extract and Match
+   - Pop minimum from debtor heap
+   - Pop maximum from creditor heap
+   - These are the "extreme" values
+
+Step 4: Calculate Settlement
+   - settlement = min(|debt|, credit)
+   - Record: debtor pays settlement to creditor
+
+Step 5: Re-insert if Needed
+   - If debtor still owes: push back to min-heap
+   - If creditor still owed: push back to max-heap
+
+Step 6: Repeat Until Empty
+   - Continue until both heaps are empty
+                        </pre>
+                    </div>
+
+                    <div class="code-block">
+                        <div class="code-header">
+                            <i data-lucide="file-code" class="icon-xs"></i> C++ Implementation Highlights
+                        </div>
+                        <pre>
+// Priority queues:
+// Min-heap for debtors (smallest = most negative)
+priority_queue&lt;pair&lt;int,string&gt;, 
+               vector&lt;pair&lt;int,string&gt;&gt;,
+               greater&lt;pair&lt;int,string&gt;&gt;&gt; debtors;
+
+// Max-heap for creditors (largest = most positive)
+priority_queue&lt;pair&lt;int,string&gt;&gt; creditors;
+
+// Main loop:
+while (!debtors.empty() && !creditors.empty()) {
+    auto [debt, debtor] = debtors.top(); debtors.pop();
+    auto [credit, creditor] = creditors.top(); creditors.pop();
+    
+    int settle = min(-debt, credit);
+    // Record settlement
+    
+    if (-debt > settle) debtors.push({debt + settle, debtor});
+    if (credit > settle) creditors.push({credit - settle, creditor});
+}
+                        </pre>
+                    </div>
+
+                    <div class="complexity">
+                        <div class="complexity-item">
+                            <div class="complexity-header">
+                                <i data-lucide="clock" class="icon-xs"></i>
+                                <strong>Time Complexity:</strong>
+                            </div>
+                            <code>O(n log n)</code>
+                            <p>Each of the n people may be inserted/removed from heap multiple times.</p>
+                        </div>
+                        <div class="complexity-item">
+                            <div class="complexity-header">
+                                <i data-lucide="hard-drive" class="icon-xs"></i>
+                                <strong>Space Complexity:</strong>
+                            </div>
+                            <code>O(n)</code>
+                            <p>Two heaps storing all people's balances.</p>
+                        </div>
+                    </div>
+
+                    <div class="pros-cons">
+                        <div class="pros">
+                            <strong><i data-lucide="check-circle" class="icon-xs"></i> Advantages:</strong>
+                            <ul>
+                                <li>Always picks optimal (extreme) pair</li>
+                                <li>Efficient priority queue operations</li>
+                                <li>Great for streaming/dynamic data</li>
+                                <li>Demonstrates heap data structure well</li>
+                            </ul>
+                        </div>
+                        <div class="cons">
+                            <strong><i data-lucide="x-circle" class="icon-xs"></i> Disadvantages:</strong>
+                            <ul>
+                                <li>O(n log n) complexity (same as sorting)</li>
+                                <li>Extra overhead of heap operations</li>
+                                <li>More memory than simple arrays</li>
+                                <li>Similar results to greedy approach</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <p><strong><i data-lucide="lightbulb" class="icon-xs"></i> When to Use:</strong> When dealing with streaming data where new transactions arrive dynamically, or when you need priority-based processing.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Comparison Summary -->
+        <section class="section">
+            <div class="explanation-card summary-card">
+                <div class="summary-header">
+                    <i data-lucide="layout-grid" class="icon-section"></i>
+                    <h3>Quick Comparison</h3>
+                </div>
+                <div class="summary-grid">
+                    <div class="summary-item" data-algo="1">
+                        <div class="summary-icon"><i data-lucide="arrow-right-left"></i></div>
+                        <h4>Greedy Two-Pointer</h4>
+                        <p>By: Digvijay</p>
+                        <p>Time: O(n log n)</p>
+                        <p class="small">Best for: Quick, simple solutions</p>
+                    </div>
+                    <div class="summary-item" data-algo="2">
+                        <div class="summary-icon"><i data-lucide="git-branch"></i></div>
+                        <h4>DFS Graph</h4>
+                        <p>By: Shahid</p>
+                        <p>Time: O(V + E)</p>
+                        <p class="small">Best for: Understanding paths</p>
+                    </div>
+                    <div class="summary-item" data-algo="3">
+                        <div class="summary-icon"><i data-lucide="link"></i></div>
+                        <h4>Union-Find</h4>
+                        <p>By: Eeshan</p>
+                        <p>Time: O(n α(n))</p>
+                        <p class="small">Best for: Connected components</p>
+                    </div>
+                    <div class="summary-item" data-algo="4">
+                        <div class="summary-icon"><i data-lucide="bar-chart-2"></i></div>
+                        <h4>Min-Heap</h4>
+                        <p>By: Anagh</p>
+                        <p>Time: O(n log n)</p>
+                        <p class="small">Best for: Dynamic/streaming data</p>
+                    </div>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 40px;">
+                <a href="index.html" class="btn btn-primary btn-glow" style="text-decoration: none;">
+                    <i data-lucide="play-circle" class="icon-btn"></i> Try the Algorithms
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">
+                <i data-lucide="wallet" class="icon-footer"></i>
+                <span>Cash Flow Simplification</span>
+            </div>
+            <div class="footer-info">
+                <p><i data-lucide="code-2" class="icon-xs"></i> Data Structures & Algorithms Class Project</p>
+                <p><i data-lucide="users" class="icon-xs"></i> Team: Digvijay, Shahid, Eeshan, Anagh</p>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 All rights reserved</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+        
+        // Add scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-in');
+                }
+            });
+        }, observerOptions);
+        
+        document.querySelectorAll('.section, .explanation-card').forEach(el => {
+            observer.observe(el);
+        });
+        
+        // Smooth scroll for navigation
+        document.querySelectorAll('.navbar a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
