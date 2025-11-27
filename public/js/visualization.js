@@ -1,6 +1,17 @@
 let beforeNetwork = null;
 let afterNetwork = null;
 
+// Modern dark theme colors
+const graphColors = {
+    debtor: { background: '#ef4444', border: '#dc2626', highlight: { background: '#f87171', border: '#ef4444' } },
+    creditor: { background: '#22c55e', border: '#16a34a', highlight: { background: '#4ade80', border: '#22c55e' } },
+    neutral: { background: '#64748b', border: '#475569', highlight: { background: '#94a3b8', border: '#64748b' } },
+    edge: '#64748b',
+    edgeHighlight: '#00d4ff',
+    settlement: '#22c55e',
+    settlementHighlight: '#4ade80'
+};
+
 function drawGraphs() {
     if (transactions.length === 0) {
         document.getElementById('before-info').textContent = 'Add transactions to see graph';
@@ -28,16 +39,19 @@ function drawBeforeGraph() {
     // Add nodes with balance information
     people.forEach(person => {
         const balance = netBalances[person] || 0;
-        let color, title;
+        let color, title, shadowColor;
         
         if (balance < 0) {
-            color = '#ef4444'; // Red for debtors
+            color = graphColors.debtor;
+            shadowColor = 'rgba(239, 68, 68, 0.5)';
             title = `${person}\nOwes: $${Math.abs(balance)}`;
         } else if (balance > 0) {
-            color = '#10b981'; // Green for creditors
+            color = graphColors.creditor;
+            shadowColor = 'rgba(34, 197, 94, 0.5)';
             title = `${person}\nOwed: $${balance}`;
         } else {
-            color = '#6b7280'; // Gray for neutral
+            color = graphColors.neutral;
+            shadowColor = 'rgba(100, 116, 139, 0.5)';
             title = `${person}\nBalanced`;
         }
 
@@ -47,8 +61,11 @@ function drawBeforeGraph() {
             color: color,
             title: title,
             shape: 'circle',
-            font: { size: 14, color: 'white' },
-            widthConstraint: { maximum: 100 }
+            font: { size: 14, color: '#ffffff', face: 'Inter, sans-serif', bold: true },
+            widthConstraint: { maximum: 100 },
+            shadow: { enabled: true, color: shadowColor, size: 15, x: 0, y: 0 },
+            borderWidth: 2,
+            borderWidthSelected: 3
         });
     });
 
@@ -60,10 +77,12 @@ function drawBeforeGraph() {
             to: t.to,
             label: `$${t.amount}`,
             title: `${t.from} → ${t.to}: $${t.amount}`,
-            arrows: 'to',
-            color: { color: '#9ca3af', highlight: '#3b82f6' },
-            font: { align: 'middle', size: 12 },
-            smooth: { type: 'curvedCW' }
+            arrows: { to: { enabled: true, scaleFactor: 0.8 } },
+            color: { color: graphColors.edge, highlight: graphColors.edgeHighlight, opacity: 0.8 },
+            font: { align: 'middle', size: 12, color: '#94a3b8', strokeWidth: 0 },
+            smooth: { type: 'curvedCW', roundness: 0.2 },
+            width: 2,
+            shadow: { enabled: true, color: 'rgba(0, 0, 0, 0.3)', size: 5 }
         });
     });
 
@@ -82,7 +101,15 @@ function drawBeforeGraph() {
             navigationButtons: true,
             keyboard: true,
             zoomView: true,
-            dragView: true
+            dragView: true,
+            hover: true
+        },
+        nodes: {
+            chosen: {
+                node: function(values) {
+                    values.shadowSize = 25;
+                }
+            }
         }
     };
 
@@ -120,16 +147,19 @@ function drawAfterGraph() {
     // Add nodes
     people.forEach(person => {
         const balance = netBalances[person] || 0;
-        let color, title;
+        let color, title, shadowColor;
         
         if (balance < 0) {
-            color = '#ef4444';
+            color = graphColors.debtor;
+            shadowColor = 'rgba(239, 68, 68, 0.5)';
             title = `${person}\nOwes: $${Math.abs(balance)}`;
         } else if (balance > 0) {
-            color = '#10b981';
+            color = graphColors.creditor;
+            shadowColor = 'rgba(34, 197, 94, 0.5)';
             title = `${person}\nOwed: $${balance}`;
         } else {
-            color = '#6b7280';
+            color = graphColors.neutral;
+            shadowColor = 'rgba(100, 116, 139, 0.5)';
             title = `${person}\nBalanced`;
         }
 
@@ -139,8 +169,11 @@ function drawAfterGraph() {
             color: color,
             title: title,
             shape: 'circle',
-            font: { size: 14, color: 'white' },
-            widthConstraint: { maximum: 100 }
+            font: { size: 14, color: '#ffffff', face: 'Inter, sans-serif', bold: true },
+            widthConstraint: { maximum: 100 },
+            shadow: { enabled: true, color: shadowColor, size: 15, x: 0, y: 0 },
+            borderWidth: 2,
+            borderWidthSelected: 3
         });
     });
 
@@ -164,11 +197,12 @@ function drawAfterGraph() {
                 to: to,
                 label: `$${amount}`,
                 title: `${from} → ${to}: $${amount}`,
-                arrows: 'to',
-                color: { color: '#10b981', highlight: '#059669' },
+                arrows: { to: { enabled: true, scaleFactor: 0.8 } },
+                color: { color: graphColors.settlement, highlight: graphColors.settlementHighlight, opacity: 0.9 },
                 width: 3,
-                font: { align: 'middle', size: 12 },
-                smooth: { type: 'curvedCW' }
+                font: { align: 'middle', size: 12, color: '#22c55e', strokeWidth: 0 },
+                smooth: { type: 'curvedCW', roundness: 0.2 },
+                shadow: { enabled: true, color: 'rgba(34, 197, 94, 0.4)', size: 10 }
             });
         }
     });
@@ -188,7 +222,15 @@ function drawAfterGraph() {
             navigationButtons: true,
             keyboard: true,
             zoomView: true,
-            dragView: true
+            dragView: true,
+            hover: true
+        },
+        nodes: {
+            chosen: {
+                node: function(values) {
+                    values.shadowSize = 25;
+                }
+            }
         }
     };
 

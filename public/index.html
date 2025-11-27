@@ -3,138 +3,245 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>💰 Cash Flow Simplification - 4 Algorithm Comparison</title>
+    <title>Cash Flow Simplification - 4 Algorithm Comparison</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
     <!-- Vis.js for graph visualization -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.21.0/vis.min.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.21.0/vis.min.css" rel="stylesheet" />
 </head>
 <body>
+    <!-- Animated Background -->
+    <div class="bg-animation">
+        <div class="bg-gradient"></div>
+        <div class="bg-grid"></div>
+        <div class="floating-orbs">
+            <div class="orb orb-1"></div>
+            <div class="orb orb-2"></div>
+            <div class="orb orb-3"></div>
+        </div>
+    </div>
+
     <header>
         <div class="header-content">
-            <h1>💰 Cash Flow Simplification</h1>
-            <p class="subtitle">4 Different Algorithms Solving the Same Problem</p>
-            <p class="team">Team Members: Person A • Person B • Person C • Person D</p>
+            <div class="logo-container">
+                <div class="logo-icon">
+                    <i data-lucide="wallet" class="icon-large"></i>
+                </div>
+                <div class="logo-rings">
+                    <div class="ring ring-1"></div>
+                    <div class="ring ring-2"></div>
+                    <div class="ring ring-3"></div>
+                </div>
+            </div>
+            <h1>Cash Flow <span class="gradient-text">Simplification</span></h1>
+            <p class="subtitle">
+                <i data-lucide="git-compare" class="icon-inline"></i>
+                4 Different Algorithms Solving the Same Problem
+            </p>
+            <div class="team-badges">
+                <span class="badge"><i data-lucide="user" class="icon-xs"></i> Person A</span>
+                <span class="badge"><i data-lucide="user" class="icon-xs"></i> Person B</span>
+                <span class="badge"><i data-lucide="user" class="icon-xs"></i> Person C</span>
+                <span class="badge"><i data-lucide="user" class="icon-xs"></i> Person D</span>
+            </div>
+        </div>
+        <div class="header-decoration">
+            <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
+                <path d="M0,60 C360,120 720,0 1080,60 C1260,90 1380,60 1440,60 L1440,120 L0,120 Z" fill="var(--bg-primary)"/>
+            </svg>
         </div>
     </header>
 
     <nav class="navbar">
-        <ul>
-            <li><a href="#input-section">Input</a></li>
-            <li><a href="#visualization-section">Graphs</a></li>
-            <li><a href="#results-section">Results</a></li>
-            <li><a href="#comparison-section">Comparison</a></li>
-            <li><a href="#explanations-section">Learn</a></li>
-        </ul>
+        <div class="nav-container">
+            <ul>
+                <li><a href="#input-section"><i data-lucide="plus-circle" class="icon-nav"></i><span>Input</span></a></li>
+                <li><a href="#visualization-section"><i data-lucide="git-branch" class="icon-nav"></i><span>Graphs</span></a></li>
+                <li><a href="#results-section"><i data-lucide="cpu" class="icon-nav"></i><span>Results</span></a></li>
+                <li><a href="#comparison-section"><i data-lucide="bar-chart-3" class="icon-nav"></i><span>Compare</span></a></li>
+                <li><a href="#explanations-section"><i data-lucide="book-open" class="icon-nav"></i><span>Learn</span></a></li>
+            </ul>
+        </div>
     </nav>
 
     <main class="container">
         <!-- INPUT SECTION -->
         <section id="input-section" class="section">
-            <h2>➕ Add Transactions</h2>
+            <div class="section-header">
+                <div class="section-icon">
+                    <i data-lucide="send" class="icon-section"></i>
+                </div>
+                <h2>Add Transactions</h2>
+            </div>
             <div class="input-container">
                 <div class="form-group">
-                    <input id="fromInput" placeholder="From (person name)" class="input-field">
-                    <input id="toInput" placeholder="To (person name)" class="input-field">
-                    <input id="amountInput" placeholder="Amount ($)" type="number" class="input-field">
+                    <div class="input-wrapper">
+                        <i data-lucide="user" class="input-icon"></i>
+                        <input id="fromInput" placeholder="From (person name)" class="input-field">
+                    </div>
+                    <div class="input-wrapper">
+                        <i data-lucide="user-check" class="input-icon"></i>
+                        <input id="toInput" placeholder="To (person name)" class="input-field">
+                    </div>
+                    <div class="input-wrapper">
+                        <i data-lucide="dollar-sign" class="input-icon"></i>
+                        <input id="amountInput" placeholder="Amount" type="number" class="input-field">
+                    </div>
                 </div>
                 <div class="button-group">
-                    <button onclick="addTransaction()" class="btn btn-primary">+ Add Transaction</button>
-                    <button onclick="loadSampleData()" class="btn btn-secondary">📋 Sample Data</button>
-                    <button onclick="clearAll()" class="btn btn-danger">🗑️ Clear All</button>
+                    <button onclick="addTransaction()" class="btn btn-primary">
+                        <i data-lucide="plus" class="icon-btn"></i> Add Transaction
+                    </button>
+                    <button onclick="loadSampleData()" class="btn btn-secondary">
+                        <i data-lucide="database" class="icon-btn"></i> Sample Data
+                    </button>
+                    <button onclick="clearAll()" class="btn btn-danger">
+                        <i data-lucide="trash-2" class="icon-btn"></i> Clear All
+                    </button>
                 </div>
             </div>
 
             <div id="transactions-list" class="transactions-list">
-                <h3>Current Transactions (0)</h3>
+                <h3><i data-lucide="list" class="icon-inline"></i> Current Transactions (0)</h3>
                 <p class="empty-message">No transactions added yet</p>
             </div>
         </section>
 
         <!-- GRAPH VISUALIZATION SECTION -->
         <section id="visualization-section" class="section">
-            <h2>📊 Transaction Graphs</h2>
+            <div class="section-header">
+                <div class="section-icon">
+                    <i data-lucide="share-2" class="icon-section"></i>
+                </div>
+                <h2>Transaction Graphs</h2>
+            </div>
             <div class="graph-container">
                 <div class="graph-box">
-                    <h3>Original Transactions</h3>
+                    <div class="graph-header">
+                        <i data-lucide="git-merge" class="icon-graph"></i>
+                        <h3>Original Transactions</h3>
+                    </div>
                     <div id="graph-before" class="graph"></div>
-                    <p class="graph-info" id="before-info">Add transactions to see graph</p>
+                    <p class="graph-info" id="before-info">
+                        <i data-lucide="info" class="icon-xs"></i> Add transactions to see graph
+                    </p>
                 </div>
-                <div class="graph-box">
-                    <h3>Simplified (Algorithm 1)</h3>
+                <div class="graph-box graph-box-success">
+                    <div class="graph-header">
+                        <i data-lucide="git-pull-request" class="icon-graph"></i>
+                        <h3>Simplified (Algorithm 1)</h3>
+                    </div>
                     <div id="graph-after" class="graph"></div>
-                    <p class="graph-info" id="after-info">Run algorithms to see simplified graph</p>
+                    <p class="graph-info" id="after-info">
+                        <i data-lucide="info" class="icon-xs"></i> Run algorithms to see simplified graph
+                    </p>
                 </div>
             </div>
         </section>
 
         <!-- ALGORITHM RESULTS SECTION -->
         <section id="results-section" class="section">
-            <h2>🧮 Algorithm Results</h2>
-            <button onclick="runAllAlgorithms()" class="btn btn-primary btn-large">▶️ Run All Algorithms</button>
+            <div class="section-header">
+                <div class="section-icon">
+                    <i data-lucide="zap" class="icon-section"></i>
+                </div>
+                <h2>Algorithm Results</h2>
+            </div>
+            <button onclick="runAllAlgorithms()" class="btn btn-primary btn-large btn-glow">
+                <i data-lucide="play" class="icon-btn"></i> Run All Algorithms
+            </button>
 
             <div class="algorithms-grid">
                 <!-- Algorithm 1: Greedy -->
-                <div class="algorithm-card">
+                <div class="algorithm-card" data-algo="1">
                     <div class="card-header algo-1">
-                        <h3>Algorithm 1: Greedy Two-Pointer</h3>
-                        <p class="person-label">Person A</p>
+                        <div class="algo-icon"><i data-lucide="arrow-right-left"></i></div>
+                        <div class="algo-info">
+                            <h3>Greedy Two-Pointer</h3>
+                            <p class="person-label"><i data-lucide="user" class="icon-xs"></i> Person A</p>
+                        </div>
+                        <div class="algo-number">01</div>
                     </div>
                     <div class="card-body">
-                        <div class="ds-tag">Map • Vector • Sorting</div>
+                        <div class="ds-tag"><i data-lucide="layers" class="icon-xs"></i> Map • Vector • Sorting</div>
                         <div id="algo1-results" class="results-list">
                             <p class="placeholder">Run algorithms to see results</p>
                         </div>
                         <div id="algo1-stats" class="stats"></div>
-                        <button onclick="showWalkthrough(1)" class="btn btn-small">👁️ Walkthrough</button>
+                        <button onclick="showWalkthrough(1)" class="btn btn-small btn-outline">
+                            <i data-lucide="eye" class="icon-btn"></i> Walkthrough
+                        </button>
                     </div>
                 </div>
 
                 <!-- Algorithm 2: DFS -->
-                <div class="algorithm-card">
+                <div class="algorithm-card" data-algo="2">
                     <div class="card-header algo-2">
-                        <h3>Algorithm 2: DFS Graph Traversal</h3>
-                        <p class="person-label">Person B</p>
+                        <div class="algo-icon"><i data-lucide="git-branch"></i></div>
+                        <div class="algo-info">
+                            <h3>DFS Graph Traversal</h3>
+                            <p class="person-label"><i data-lucide="user" class="icon-xs"></i> Person B</p>
+                        </div>
+                        <div class="algo-number">02</div>
                     </div>
                     <div class="card-body">
-                        <div class="ds-tag">Adjacency List • DFS • Map</div>
+                        <div class="ds-tag"><i data-lucide="layers" class="icon-xs"></i> Adjacency List • DFS • Map</div>
                         <div id="algo2-results" class="results-list">
                             <p class="placeholder">Run algorithms to see results</p>
                         </div>
                         <div id="algo2-stats" class="stats"></div>
-                        <button onclick="showWalkthrough(2)" class="btn btn-small">👁️ Walkthrough</button>
+                        <button onclick="showWalkthrough(2)" class="btn btn-small btn-outline">
+                            <i data-lucide="eye" class="icon-btn"></i> Walkthrough
+                        </button>
                     </div>
                 </div>
 
                 <!-- Algorithm 3: Union-Find -->
-                <div class="algorithm-card">
+                <div class="algorithm-card" data-algo="3">
                     <div class="card-header algo-3">
-                        <h3>Algorithm 3: Union-Find</h3>
-                        <p class="person-label">Person C</p>
+                        <div class="algo-icon"><i data-lucide="link"></i></div>
+                        <div class="algo-info">
+                            <h3>Union-Find</h3>
+                            <p class="person-label"><i data-lucide="user" class="icon-xs"></i> Person C</p>
+                        </div>
+                        <div class="algo-number">03</div>
                     </div>
                     <div class="card-body">
-                        <div class="ds-tag">Disjoint Sets • Path Compression</div>
+                        <div class="ds-tag"><i data-lucide="layers" class="icon-xs"></i> Disjoint Sets • Path Compression</div>
                         <div id="algo3-results" class="results-list">
                             <p class="placeholder">Run algorithms to see results</p>
                         </div>
                         <div id="algo3-stats" class="stats"></div>
-                        <button onclick="showWalkthrough(3)" class="btn btn-small">👁️ Walkthrough</button>
+                        <button onclick="showWalkthrough(3)" class="btn btn-small btn-outline">
+                            <i data-lucide="eye" class="icon-btn"></i> Walkthrough
+                        </button>
                     </div>
                 </div>
 
                 <!-- Algorithm 4: Heap -->
-                <div class="algorithm-card">
+                <div class="algorithm-card" data-algo="4">
                     <div class="card-header algo-4">
-                        <h3>Algorithm 4: Min-Heap Priority Queue</h3>
-                        <p class="person-label">Person D</p>
+                        <div class="algo-icon"><i data-lucide="bar-chart-2"></i></div>
+                        <div class="algo-info">
+                            <h3>Min-Heap Priority Queue</h3>
+                            <p class="person-label"><i data-lucide="user" class="icon-xs"></i> Person D</p>
+                        </div>
+                        <div class="algo-number">04</div>
                     </div>
                     <div class="card-body">
-                        <div class="ds-tag">Priority Queue • Min-Heap • Max-Heap</div>
+                        <div class="ds-tag"><i data-lucide="layers" class="icon-xs"></i> Priority Queue • Min-Heap</div>
                         <div id="algo4-results" class="results-list">
                             <p class="placeholder">Run algorithms to see results</p>
                         </div>
                         <div id="algo4-stats" class="stats"></div>
-                        <button onclick="showWalkthrough(4)" class="btn btn-small">👁️ Walkthrough</button>
+                        <button onclick="showWalkthrough(4)" class="btn btn-small btn-outline">
+                            <i data-lucide="eye" class="icon-btn"></i> Walkthrough
+                        </button>
                     </div>
                 </div>
             </div>
@@ -142,23 +249,28 @@
 
         <!-- COMPARISON SECTION -->
         <section id="comparison-section" class="section">
-            <h2>📈 Metrics Comparison</h2>
+            <div class="section-header">
+                <div class="section-icon">
+                    <i data-lucide="trending-up" class="icon-section"></i>
+                </div>
+                <h2>Metrics Comparison</h2>
+            </div>
             <div class="comparison-table-wrapper">
                 <table id="comparison-table" class="comparison-table">
                     <thead>
                         <tr>
-                            <th>Algorithm</th>
-                            <th>Settlements</th>
-                            <th>Original Txs</th>
-                            <th>Efficiency</th>
-                            <th>Time Complexity</th>
-                            <th>Space Complexity</th>
+                            <th><i data-lucide="cpu" class="icon-xs"></i> Algorithm</th>
+                            <th><i data-lucide="check-circle" class="icon-xs"></i> Settlements</th>
+                            <th><i data-lucide="arrow-right" class="icon-xs"></i> Original Txs</th>
+                            <th><i data-lucide="percent" class="icon-xs"></i> Efficiency</th>
+                            <th><i data-lucide="clock" class="icon-xs"></i> Time</th>
+                            <th><i data-lucide="hard-drive" class="icon-xs"></i> Space</th>
                         </tr>
                     </thead>
                     <tbody id="comparison-body">
                         <tr>
-                            <td colspan="6" style="text-align: center; padding: 20px;">
-                                Run algorithms to see comparison
+                            <td colspan="6" style="text-align: center; padding: 30px;">
+                                <i data-lucide="play-circle" class="icon-inline"></i> Run algorithms to see comparison
                             </td>
                         </tr>
                     </tbody>
@@ -168,19 +280,29 @@
 
         <!-- ALGORITHM EXPLANATIONS -->
         <section id="explanations-section" class="section">
-            <h2>📚 Algorithm Explanations</h2>
+            <div class="section-header">
+                <div class="section-icon">
+                    <i data-lucide="graduation-cap" class="icon-section"></i>
+                </div>
+                <h2>Algorithm Explanations</h2>
+            </div>
 
             <!-- Algorithm 1 Explanation -->
             <div class="explanation-card">
                 <div class="exp-header algo-1">
-                    <h3>Algorithm 1: Greedy Two-Pointer</h3>
-                    <span class="exp-by">Explained by: Person A</span>
+                    <div class="exp-icon"><i data-lucide="arrow-right-left"></i></div>
+                    <div>
+                        <h3>Algorithm 1: Greedy Two-Pointer</h3>
+                        <span class="exp-by"><i data-lucide="user" class="icon-xs"></i> Explained by: Person A</span>
+                    </div>
                 </div>
                 <div class="exp-content">
                     <p><strong>Core Idea:</strong> Sort all net balances and greedily match the person who owes the most with the person who is owed the most.</p>
                     
                     <div class="code-block">
-                        <strong>Pseudocode:</strong>
+                        <div class="code-header">
+                            <i data-lucide="code" class="icon-xs"></i> Pseudocode
+                        </div>
                         <pre>
 1. Calculate net balance for each person using Hash Map
 2. Create vector with non-zero balances
@@ -196,18 +318,26 @@
 
                     <div class="complexity">
                         <div class="complexity-item">
-                            <strong>Time Complexity:</strong> <code>O(n log n)</code>
+                            <div class="complexity-header">
+                                <i data-lucide="clock" class="icon-xs"></i>
+                                <strong>Time Complexity:</strong>
+                            </div>
+                            <code>O(n log n)</code>
                             <p>Due to sorting. Matching is O(n).</p>
                         </div>
                         <div class="complexity-item">
-                            <strong>Space Complexity:</strong> <code>O(n)</code>
+                            <div class="complexity-header">
+                                <i data-lucide="hard-drive" class="icon-xs"></i>
+                                <strong>Space Complexity:</strong>
+                            </div>
+                            <code>O(n)</code>
                             <p>Vector to store balances.</p>
                         </div>
                     </div>
 
                     <div class="pros-cons">
                         <div class="pros">
-                            <strong>✅ Advantages:</strong>
+                            <strong><i data-lucide="check-circle" class="icon-xs"></i> Advantages:</strong>
                             <ul>
                                 <li>Simple and intuitive approach</li>
                                 <li>Easy to understand and explain</li>
@@ -216,7 +346,7 @@
                             </ul>
                         </div>
                         <div class="cons">
-                            <strong>❌ Disadvantages:</strong>
+                            <strong><i data-lucide="x-circle" class="icon-xs"></i> Disadvantages:</strong>
                             <ul>
                                 <li>Doesn't show actual payment paths</li>
                                 <li>O(n log n) complexity due to sorting</li>
@@ -225,21 +355,26 @@
                         </div>
                     </div>
 
-                    <p><strong>When to Use:</strong> Best for general cases where you just need minimum settlements quickly.</p>
+                    <p><strong><i data-lucide="lightbulb" class="icon-xs"></i> When to Use:</strong> Best for general cases where you just need minimum settlements quickly.</p>
                 </div>
             </div>
 
             <!-- Algorithm 2 Explanation -->
             <div class="explanation-card">
                 <div class="exp-header algo-2">
-                    <h3>Algorithm 2: DFS Graph Traversal</h3>
-                    <span class="exp-by">Explained by: Person B</span>
+                    <div class="exp-icon"><i data-lucide="git-branch"></i></div>
+                    <div>
+                        <h3>Algorithm 2: DFS Graph Traversal</h3>
+                        <span class="exp-by"><i data-lucide="user" class="icon-xs"></i> Explained by: Person B</span>
+                    </div>
                 </div>
                 <div class="exp-content">
                     <p><strong>Core Idea:</strong> Treat cash flow as a directed graph. Use Depth-First Search to find settlement paths from debtors to creditors.</p>
                     
                     <div class="code-block">
-                        <strong>Pseudocode:</strong>
+                        <div class="code-header">
+                            <i data-lucide="code" class="icon-xs"></i> Pseudocode
+                        </div>
                         <pre>
 1. Build adjacency list graph from transactions
 2. Calculate net balance for each person
@@ -254,18 +389,26 @@
 
                     <div class="complexity">
                         <div class="complexity-item">
-                            <strong>Time Complexity:</strong> <code>O(V + E)</code>
+                            <div class="complexity-header">
+                                <i data-lucide="clock" class="icon-xs"></i>
+                                <strong>Time Complexity:</strong>
+                            </div>
+                            <code>O(V + E)</code>
                             <p>V = number of people, E = transactions.</p>
                         </div>
                         <div class="complexity-item">
-                            <strong>Space Complexity:</strong> <code>O(V + E)</code>
+                            <div class="complexity-header">
+                                <i data-lucide="hard-drive" class="icon-xs"></i>
+                                <strong>Space Complexity:</strong>
+                            </div>
+                            <code>O(V + E)</code>
                             <p>For adjacency list and recursion stack.</p>
                         </div>
                     </div>
 
                     <div class="pros-cons">
                         <div class="pros">
-                            <strong>✅ Advantages:</strong>
+                            <strong><i data-lucide="check-circle" class="icon-xs"></i> Advantages:</strong>
                             <ul>
                                 <li>Shows actual transaction paths</li>
                                 <li>Graph-based approach is educational</li>
@@ -274,7 +417,7 @@
                             </ul>
                         </div>
                         <div class="cons">
-                            <strong>❌ Disadvantages:</strong>
+                            <strong><i data-lucide="x-circle" class="icon-xs"></i> Disadvantages:</strong>
                             <ul>
                                 <li>More complex implementation</li>
                                 <li>Recursion can cause stack overflow for large graphs</li>
@@ -284,21 +427,26 @@
                         </div>
                     </div>
 
-                    <p><strong>When to Use:</strong> When you need to understand payment paths and have a smaller dataset.</p>
+                    <p><strong><i data-lucide="lightbulb" class="icon-xs"></i> When to Use:</strong> When you need to understand payment paths and have a smaller dataset.</p>
                 </div>
             </div>
 
             <!-- Algorithm 3 Explanation -->
             <div class="explanation-card">
                 <div class="exp-header algo-3">
-                    <h3>Algorithm 3: Union-Find (Disjoint Sets)</h3>
-                    <span class="exp-by">Explained by: Person C</span>
+                    <div class="exp-icon"><i data-lucide="link"></i></div>
+                    <div>
+                        <h3>Algorithm 3: Union-Find (Disjoint Sets)</h3>
+                        <span class="exp-by"><i data-lucide="user" class="icon-xs"></i> Explained by: Person C</span>
+                    </div>
                 </div>
                 <div class="exp-content">
                     <p><strong>Core Idea:</strong> Group connected people using Union-Find data structure. Then solve each independent group separately.</p>
                     
                     <div class="code-block">
-                        <strong>Pseudocode:</strong>
+                        <div class="code-header">
+                            <i data-lucide="code" class="icon-xs"></i> Pseudocode
+                        </div>
                         <pre>
 1. Create Union-Find structure with parent and rank arrays
 2. For each transaction, unite the two people involved
@@ -312,18 +460,26 @@
 
                     <div class="complexity">
                         <div class="complexity-item">
-                            <strong>Time Complexity:</strong> <code>O(n α(n)) ≈ O(n)</code>
+                            <div class="complexity-header">
+                                <i data-lucide="clock" class="icon-xs"></i>
+                                <strong>Time Complexity:</strong>
+                            </div>
+                            <code>O(n α(n)) ≈ O(n)</code>
                             <p>α = inverse Ackermann function (practically constant).</p>
                         </div>
                         <div class="complexity-item">
-                            <strong>Space Complexity:</strong> <code>O(n)</code>
+                            <div class="complexity-header">
+                                <i data-lucide="hard-drive" class="icon-xs"></i>
+                                <strong>Space Complexity:</strong>
+                            </div>
+                            <code>O(n)</code>
                             <p>For parent and rank arrays.</p>
                         </div>
                     </div>
 
                     <div class="pros-cons">
                         <div class="pros">
-                            <strong>✅ Advantages:</strong>
+                            <strong><i data-lucide="check-circle" class="icon-xs"></i> Advantages:</strong>
                             <ul>
                                 <li>Nearly linear time: O(n α(n))</li>
                                 <li>Identifies independent groups</li>
@@ -332,7 +488,7 @@
                             </ul>
                         </div>
                         <div class="cons">
-                            <strong>❌ Disadvantages:</strong>
+                            <strong><i data-lucide="x-circle" class="icon-xs"></i> Disadvantages:</strong>
                             <ul>
                                 <li>Requires understanding Union-Find</li>
                                 <li>More complex data structure</li>
@@ -341,21 +497,26 @@
                         </div>
                     </div>
 
-                    <p><strong>When to Use:</strong> When you have disconnected groups and want to optimize computation.</p>
+                    <p><strong><i data-lucide="lightbulb" class="icon-xs"></i> When to Use:</strong> When you have disconnected groups and want to optimize computation.</p>
                 </div>
             </div>
 
             <!-- Algorithm 4 Explanation -->
             <div class="explanation-card">
                 <div class="exp-header algo-4">
-                    <h3>Algorithm 4: Min-Heap Priority Queue</h3>
-                    <span class="exp-by">Explained by: Person D</span>
+                    <div class="exp-icon"><i data-lucide="bar-chart-2"></i></div>
+                    <div>
+                        <h3>Algorithm 4: Min-Heap Priority Queue</h3>
+                        <span class="exp-by"><i data-lucide="user" class="icon-xs"></i> Explained by: Person D</span>
+                    </div>
                 </div>
                 <div class="exp-content">
                     <p><strong>Core Idea:</strong> Use two heaps - a min-heap for debtors and a max-heap for creditors. Repeatedly extract and match extremes.</p>
                     
                     <div class="code-block">
-                        <strong>Pseudocode:</strong>
+                        <div class="code-header">
+                            <i data-lucide="code" class="icon-xs"></i> Pseudocode
+                        </div>
                         <pre>
 1. Calculate net balances for all people
 2. Create min-heap for debtors (negative balances)
@@ -371,18 +532,26 @@
 
                     <div class="complexity">
                         <div class="complexity-item">
-                            <strong>Time Complexity:</strong> <code>O(n log n)</code>
+                            <div class="complexity-header">
+                                <i data-lucide="clock" class="icon-xs"></i>
+                                <strong>Time Complexity:</strong>
+                            </div>
+                            <code>O(n log n)</code>
                             <p>n heap insertions and extractions.</p>
                         </div>
                         <div class="complexity-item">
-                            <strong>Space Complexity:</strong> <code>O(n)</code>
+                            <div class="complexity-header">
+                                <i data-lucide="hard-drive" class="icon-xs"></i>
+                                <strong>Space Complexity:</strong>
+                            </div>
+                            <code>O(n)</code>
                             <p>Two heaps storing balances.</p>
                         </div>
                     </div>
 
                     <div class="pros-cons">
                         <div class="pros">
-                            <strong>✅ Advantages:</strong>
+                            <strong><i data-lucide="check-circle" class="icon-xs"></i> Advantages:</strong>
                             <ul>
                                 <li>Uses efficient priority queue structure</li>
                                 <li>Always picks optimal pair (extremes)</li>
@@ -391,7 +560,7 @@
                             </ul>
                         </div>
                         <div class="cons">
-                            <strong>❌ Disadvantages:</strong>
+                            <strong><i data-lucide="x-circle" class="icon-xs"></i> Disadvantages:</strong>
                             <ul>
                                 <li>O(n log n) complexity (not better than sorting)</li>
                                 <li>Extra overhead of heap operations</li>
@@ -401,30 +570,37 @@
                         </div>
                     </div>
 
-                    <p><strong>When to Use:</strong> When working with streaming data or when you benefit from heap properties for other operations.</p>
+                    <p><strong><i data-lucide="lightbulb" class="icon-xs"></i> When to Use:</strong> When working with streaming data or when you benefit from heap properties for other operations.</p>
                 </div>
             </div>
 
             <!-- Summary -->
             <div class="explanation-card summary-card">
-                <h3>📊 Algorithm Comparison Summary</h3>
+                <div class="summary-header">
+                    <i data-lucide="layout-grid" class="icon-section"></i>
+                    <h3>Algorithm Comparison Summary</h3>
+                </div>
                 <div class="summary-grid">
-                    <div class="summary-item">
+                    <div class="summary-item" data-algo="1">
+                        <div class="summary-icon"><i data-lucide="arrow-right-left"></i></div>
                         <h4>Algorithm 1: Greedy</h4>
                         <p>Best for: Quick, simple solutions</p>
                         <p class="small">Complexity: O(n log n)</p>
                     </div>
-                    <div class="summary-item">
+                    <div class="summary-item" data-algo="2">
+                        <div class="summary-icon"><i data-lucide="git-branch"></i></div>
                         <h4>Algorithm 2: DFS</h4>
                         <p>Best for: Understanding paths</p>
                         <p class="small">Complexity: O(V + E)</p>
                     </div>
-                    <div class="summary-item">
+                    <div class="summary-item" data-algo="3">
+                        <div class="summary-icon"><i data-lucide="link"></i></div>
                         <h4>Algorithm 3: Union-Find</h4>
                         <p>Best for: Connected components</p>
                         <p class="small">Complexity: O(n α(n))</p>
                     </div>
-                    <div class="summary-item">
+                    <div class="summary-item" data-algo="4">
+                        <div class="summary-icon"><i data-lucide="bar-chart-2"></i></div>
                         <h4>Algorithm 4: Heap</h4>
                         <p>Best for: Priority-based solutions</p>
                         <p class="small">Complexity: O(n log n)</p>
@@ -435,15 +611,28 @@
     </main>
 
     <footer>
-        <p>&copy; 2025 Cash Flow Simplification Project | Data Structures & Algorithms Class</p>
-        <p>4-Person Team Project: Algorithm Design, Implementation & Comparison</p>
+        <div class="footer-content">
+            <div class="footer-logo">
+                <i data-lucide="wallet" class="icon-footer"></i>
+                <span>Cash Flow Simplification</span>
+            </div>
+            <div class="footer-info">
+                <p><i data-lucide="code-2" class="icon-xs"></i> Data Structures & Algorithms Class Project</p>
+                <p><i data-lucide="users" class="icon-xs"></i> 4-Person Team: Algorithm Design, Implementation & Comparison</p>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 All rights reserved</p>
+            </div>
+        </div>
     </footer>
 
     <!-- Walkthrough Modal -->
     <div id="walkthrough-modal" class="modal">
         <div class="modal-content">
-            <span class="close" onclick="closeWalkthrough()">&times;</span>
-            <h2 id="walkthrough-title">Algorithm Walkthrough</h2>
+            <button class="modal-close" onclick="closeWalkthrough()">
+                <i data-lucide="x"></i>
+            </button>
+            <h2 id="walkthrough-title"><i data-lucide="play-circle" class="icon-inline"></i> Algorithm Walkthrough</h2>
             <div id="walkthrough-body"></div>
         </div>
     </div>
@@ -451,5 +640,45 @@
     <script src="js/main.js"></script>
     <script src="js/api.js"></script>
     <script src="js/visualization.js"></script>
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+        
+        // Re-initialize icons after dynamic content changes
+        const originalAddTransaction = window.addTransaction;
+        if (originalAddTransaction) {
+            window.addTransaction = function() {
+                originalAddTransaction.apply(this, arguments);
+                lucide.createIcons();
+            };
+        }
+        
+        // Add scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-in');
+                }
+            });
+        }, observerOptions);
+        
+        document.querySelectorAll('.section, .algorithm-card, .explanation-card').forEach(el => {
+            observer.observe(el);
+        });
+        
+        // Smooth scroll for navigation
+        document.querySelectorAll('.navbar a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+    </script>
 </body>
 </html>
